@@ -56,16 +56,6 @@ if __name__ == '__main__':
         print(f"{e}")
 
     df_data = pd.DataFrame()
-    files = get_files('tables')
-    replacements = {}
-    for single_file in files:
-        s_table_data = read_file(f'tables/{single_file}')
-        new_string = replace_values(s_table_data, replacements)
-        s_table_create = new_string.split(',',4)[4].replace('"','')
-
-        with engine.begin() as db:
-            db.execute(s_table_create)
-
     with engine.connect() as db:
         df_data = pd.read_sql(text('show tables from public'), db)
         for single_index, single_row in df_data.iterrows():
