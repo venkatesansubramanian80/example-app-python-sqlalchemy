@@ -57,12 +57,7 @@ if __name__ == '__main__':
 
     df_data = pd.DataFrame()
     files = get_files('tables')
-    replacements = {
-        'capsule': 'cp',
-        'carum': 'ca',
-        'cumen': 'cm',
-        'capgov': 'cg'
-    }
+    replacements = {}
     for single_file in files:
         s_table_data = read_file(f'tables/{single_file}')
         new_string = replace_values(s_table_data, replacements)
