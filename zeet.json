@@ -1,0 +1,17 @@
+{
+  "env": {
+    "user_name": {
+      "value": "value"
+    },
+    "password_value": {
+      "value": "value"
+    },
+    "url_value": {
+      "value": "value"
+    }
+  },
+  "build": {
+    "command": "python app.py",
+    "language": "python"
+  }
+}
