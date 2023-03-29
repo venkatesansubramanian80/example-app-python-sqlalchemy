@@ -16,11 +16,15 @@ def process_row(row):
     })
     df_telemetry_data = df_miss_simulation.merge(df_telemetry_data_full, on='day_range', how='left')
     df_telemetry_data.set_index('day_range', inplace=True)
+    df_telemetry_data.index = df_telemetry_data.index.tz_localize('UTC')
     df_weekly_telemetry = df_telemetry_data.resample('W').quantile(0.95)
     df_weekly_telemetry.rename(columns={'metric_value_daily': 'metric_value_weekly'}, inplace= True)
     df_monthly_telemetry = df_telemetry_data.resample('M').quantile(0.95)
     df_monthly_telemetry.rename(columns={'metric_value_daily': 'metric_value_monthly'}, inplace=True)
+    df_concat = pd.concat([df_telemetry_data, df_weekly_telemetry, df_monthly_telemetry])
     df_joined = df_telemetry_data.join(df_weekly_telemetry).join(df_monthly_telemetry)
+    df_joined.fillna(0, inplace=True)
+    df_joined.index = df_joined.index.tz_convert('US/Eastern')
     print(len(df_telemetry_data))
 
 

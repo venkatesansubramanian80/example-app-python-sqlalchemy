@@ -1,17 +1,17 @@
 {
   "env": {
     "user_name": {
-      "value": "value"
+      "value": "venkatesan"
     },
     "password_value": {
-      "value": "value"
+      "value": "fEtc8hn3XuwGm0y5O_74MQ@slick-shadow-6935.7tt.cockroachlabs.cloud:26257"
     },
     "url_value": {
-      "value": "value"
+      "value": "resource_observer"
     }
   },
   "build": {
-    "command": "python app.py",
+    "command": "python main.py",
     "language": "python"
   }
 }

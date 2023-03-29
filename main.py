@@ -57,7 +57,14 @@ if __name__ == '__main__':
 
     df_data = pd.DataFrame()
     with engine.connect() as db:
+        """
         df_data = pd.read_sql(text('show tables from public'), db)
         for single_index, single_row in df_data.iterrows():
             single_table = single_row['table_name']
             print(single_table)
+        """
+        df_data = pd.read_csv('data_to_import.csv')
+        df_data.to_sql('public.ca_telemetry', db)
+        df_data = pd.read_sql(text('select * from public.ca_telemetry'), db)
+        print(df_data.columns)
+
