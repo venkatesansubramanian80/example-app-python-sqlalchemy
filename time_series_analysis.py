@@ -17,6 +17,8 @@ def process_row(row):
     df_telemetry_data = df_miss_simulation.merge(df_telemetry_data_full, on='day_range', how='left')
     df_telemetry_data.set_index('day_range', inplace=True)
     df_telemetry_data.index = df_telemetry_data.index.tz_localize('UTC')
+    weekly_rolling_mean = df_telemetry_data.rolling(window=7).mean()
+    monthly_rolling_mean = df_telemetry_data.rolling(window=30).mean()
     df_weekly_telemetry = df_telemetry_data.resample('W').quantile(0.95)
     df_weekly_telemetry.rename(columns={'metric_value_daily': 'metric_value_weekly'}, inplace= True)
     df_monthly_telemetry = df_telemetry_data.resample('M').quantile(0.95)
